@@ -1,0 +1,39 @@
+2 screens: Height=1326
+2 screens: Width=2556
+2 screens: XPosition=1922
+2 screens: YPosition=68
+DP-1-0 HDMI-1=DP-1-0
+State=AAAA/wAAAAD9AAAAAQAAAAAAAAAAAAAAAPwCAAAAAvsAAAAiAFEAdQBpAGMAawBDAG8AbQBtAGEAbgBkAHMARABvAGMAawAAAAAA/////wAAATUA////+wAAABwAUwBTAEgATQBhAG4AYQBnAGUAcgBEAG8AYwBrAAAAAAD/////AAAA5QD///8AAAn8AAAE+AAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAACAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABwAcwBlAHMAcwBpAG8AbgBUAG8AbwBsAGIAYQByAQAAAAj/////AAAAAAAAAAA=
+
+[Desktop Entry]
+DefaultProfile=master.profile
+
+[General]
+ConfigVersion=1
+
+[KonsoleWindow]
+AllowMenuAccelerators=true
+FocusFollowsMouse=true
+RemoveWindowTitleBarAndFrame=true
+ShowWindowTitleOnTitleBar=true
+
+[MainWindow]
+2 screens: Height=1326
+2 screens: Width=2556
+2 screens: XPosition=1922
+2 screens: YPosition=68
+DP-1-0 HDMI-1=DP-1-0
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAQAAAAAAAAAAAAAAAPwCAAAAAvsAAAAiAFEAdQBpAGMAawBDAG8AbQBtAGEAbgBkAHMARABvAGMAawAAAAAA/////wAAATUA////+wAAABwAUwBTAEgATQBhAG4AYQBnAGUAcgBEAG8AYwBrAAAAAAD/////AAAA5QD///8AAAn8AAAFLgAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAACAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIAAAAAAP////8AAAAAAAAAAAAAABwAcwBlAHMAcwBpAG8AbgBUAG8AbwBsAGIAYQByAAAAAAD/////AAAAAAAAAAA=
+ToolBarsMovable=Disabled
+
+[SearchSettings]
+SearchRegExpression=true
+
+[TabBar]
+CloseTabButton=None
+TabBarPosition=Top
+TabBarVisibility=AlwaysHideTabBar
+
+[UiSettings]
+ColorScheme=
