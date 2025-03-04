@@ -528,7 +528,13 @@ require("lazy").setup({
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
 				-- clangd = {},
-				-- gopls = {},
+				gopls = {
+					analyses = {
+						unusedparams = true,
+					},
+					staticheck = true,
+					gofump = true,
+				},
 				-- pyright = {},
 				-- rust_analyzer = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -570,7 +576,9 @@ require("lazy").setup({
 			vim.list_extend(ensure_installed, {
 				"stylua",
 				"htmx-lsp",
-				"svelte-language-server"
+				"svelte-language-server",
+				"gopls",
+				"ts_ls"
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -699,6 +707,9 @@ require("lazy").setup({
 	{ "Yazeed1s/minimal.nvim"},
 	{ "yorumicolors/yorumi.nvim" },
 	{ "iagorrr/noctishc.nvim" },
+	{ "EdenEast/nightfox.nvim" },
+	{ "cdmill/neomodern.nvim" },
+	{ "bluz71/vim-nightfly-colors", name = "nightfly", lazy = false, priority = 1000 },
 	{ -- You can easily change to a different colorscheme.
 		-- Change the name of the colorscheme plugin below, and then
 		-- change the command in the config to whatever the name of that colorscheme is.
@@ -711,7 +722,9 @@ require("lazy").setup({
 			-- Like many other themes, this one has different styles, and you could load
 			-- vim.cmd.colorscheme("minimal")
 			-- vim.cmd.colorscheme("tokyonight-night")
-			vim.cmd.colorscheme("noctishc")
+			-- vim.cmd.colorscheme("nightfly")
+			-- vim.cmd("colorscheme roseprime")
+			vim.cmd.colorscheme("neomodern")
 
 			-- You can configure highlights by doing something like:
 			vim.cmd.hi("Comment gui=none")
@@ -890,6 +903,12 @@ dap.configurations.c = {
 }
 
 require('dap-go').setup({})
+dap.listeners.before.attach.dapui_config = function()
+ dapui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+ dapui.open()
+end
 
 
 vim.keymap.set('n', '<leader>xc', function() require('dap').continue() end, {desc = "[C]ontinue"})
@@ -1016,6 +1035,17 @@ require("screenkey").setup({
         ["<leader>"] = "<leader>",
     },
 })
+
+vim.diagnostic.config({
+	virtual_text = true,
+	signs = true,
+	update_in_insert = false,
+	underline = true,
+	severity_sort = true,
+	float = true,
+	wrap = true,
+})
+
 
 -- vim.keymap.set('n', '<leader>xu', function() require('dapui').toggle() end,{desc = "Toggle dapui"} )
 vim.keymap.set('n', '<leader>tsk', function() vim.cmd('Screenkey toggle') end, {desc = '[T]oggle [S]creen[K]ey' })
