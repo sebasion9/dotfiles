@@ -36,6 +36,8 @@ exec --no-startup-id nm-applet
 
 exec --no-startup-id feh --bg-fill ~/Pictures/ekkojinx.png
 
+exec --no-startup-id picom --config ~/.config/picom.conf
+
 # mouse focus and etc.
 focus_follows_mouse no
 popup_during_fullscreen ignore
@@ -55,14 +57,25 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
+#bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec konsole
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+# bindsym $mod+d exec --no-startup-id dmenu_run
+# some copied variables
+set $bg-color 	         #2f343f
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+# start rofi
+bindsym $mod+d exec rofi -show run
 
+# run script
+bindsym $mod+g exec --no-startup-id selected=$(ls /usr/local/bin | rofi -dmenu -p "run") && /bin/zsh /usr/local/bin/$selected
 
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
@@ -81,6 +94,8 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+
+bindsym Ctrl+Escape focus up
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -133,6 +148,14 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# assign workspaces to outputs
+set $nd_output "HDMI-1-1"
+set $st_output "DP-0"
+
+workspace $ws1 output $nd_output
+workspace $ws2 output $st_output
+workspace $ws3 output $st_output
+
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -161,10 +184,11 @@ bindsym $mod+n move container to workspace number $ws10
 bindsym $mod+Shift+F exec --no-startup-id rofi -show window
 
 # assigning clients to specified workspace
-assign [class="Spotify"] 1
+assign [class="Spotify"] 2
 assign [class="discord"] 2
-assign [class="Firefox-esr"] 3
-assign [class="xfce4-terminal"] 3
+assign [class="Firefox-esr"] 1
+#assign [class="xfce4-terminal"] 3
+# assign [class="konsole"] 1
 
 # class
 # Xfce4-terminal
@@ -192,21 +216,17 @@ mode "$mode_system" {
 }
 bindsym $mod+BackSpace mode "$mode_system"
 
-set $temp_mode reset (r), up (u), BRIGHTNESS dbd (d), normal (n), movie (m), xrandr reset (h)
+set $temp_mode reset (r), up (u)
 mode "$temp_mode" {
         bindsym r exec --no-startup-id redshift -x, mode "$temp_mode"
         bindsym u exec --no-startup-id redshift -O 3700, mode "$temp_mode"
-        bindsym d exec --no-startup-id xrandr --output HDMI-1 --brightness 2, mode "$temp_mode"
-        bindsym n exec --no-startup-id xrandr --output HDMI-1 --brightness 1, mode "$temp_mode"
-        bindsym m exec --no-startup-id xrandr --output HDMI-1 --brightness 0 --output eDP-1 --brightness 0, mode "$temp_mode"
-        bindsym h exec --no-startup-id xrandr --output HDMI-1 --brightness 1 --output eDP-1 --brightness 1, mode "$temp_mode"
 	bindsym Return mode "default",
 	bindsym Escape mode "default"
 }
 bindsym $mod+Shift+n mode "$temp_mode"
 set $ctl_mode pulsemixer (p) steam (s)
 mode "$ctl_mode" {
-        bindsym p exec --no-startup-id xfce4-terminal -e pulsemixer, mode "default"
+        bindsym p exec --no-startup-id konsole -e pulsemixer, mode "default"
         bindsym s exec --no-startup-id steam, mode "default"
 	#back to normal
 	bindsym Return mode "default",
@@ -223,9 +243,9 @@ mode "$kb_layout" {
 bindsym $mod+o mode "$kb_layout"
 # at startup
 exec --no-startup-id $HOME/Scripts/display_order.sh
-exec --no-startup-id $HOME/Scripts/i3-my-startup
+# exec --no-startup-id $HOME/Scripts/i3-my-startup
+# exec --no-startup-id redshift -O 2700K &
 exec --no-startup-id $HOME/Scripts/codelldb.sh > /dev/null &
-exec --no-startup-id redshift -O 2700K &
 exec --no-startup-id i3foctime > /dev/null &
 exec --no-startup-id node $HOME/Scripts/mute_status.js > /dev/null &
 exec --no-startup-id go run $HOME/Code/gohtp/main.go > /dev/null &

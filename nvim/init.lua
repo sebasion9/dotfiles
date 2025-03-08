@@ -226,6 +226,17 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
+	-- {
+	-- 	'time-tracker',
+	-- 	dir = '~/Repos/time-tracker.nvim',
+	-- 	dependencies = {
+	-- 		"3rd/sqlite.nvim",
+	-- 	},
+	-- 	event = "VeryLazy",
+	-- 	opts = {
+	-- 		data_file = vim.fn.stdpath("data") .. "/time-tracker.db",
+	-- 	},
+	-- },
 
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
@@ -724,7 +735,8 @@ require("lazy").setup({
 			-- vim.cmd.colorscheme("tokyonight-night")
 			-- vim.cmd.colorscheme("nightfly")
 			-- vim.cmd("colorscheme roseprime")
-			vim.cmd.colorscheme("neomodern")
+			-- vim.cmd.colorscheme("neomodern")
+			vim.cmd.colorscheme("yorumi")
 
 			-- You can configure highlights by doing something like:
 			vim.cmd.hi("Comment gui=none")
@@ -822,6 +834,18 @@ require("lazy").setup({
   {
     "NStefan002/screenkey.nvim"
   },
+  {
+	  "sebasion9/time-tracker.nvim",
+	  url = "https://github.com/sebasion9/time-tracker.nvim",
+	  dependencies = {
+		  "3rd/sqlite.nvim",
+	  },
+	  event = "VeryLazy",
+	  opts = {
+		  data_file = vim.fn.stdpath("data") .. "/time-tracker.db",
+	  },
+  },
+  { 'wakatime/vim-wakatime', lazy = false },
 
 	-- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
 	-- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -1035,6 +1059,15 @@ require("screenkey").setup({
         ["<leader>"] = "<leader>",
     },
 })
+
+require("time-tracker").setup({
+  data_file = vim.fn.stdpath("data") .. "/time-tracker.db",
+  tracking_events = { "BufEnter", "BufWinEnter", "CursorMoved", "CursorMovedI", "WinScrolled" },
+  tracking_timeout_seconds = 5 * 60, -- 5 minutes
+})
+
+vim.keymap.set('n', '<leader>tt', function () vim.cmd('TimeTracker') end, {desc = '[T]ime [T]racker'})
+
 
 vim.diagnostic.config({
 	virtual_text = true,
